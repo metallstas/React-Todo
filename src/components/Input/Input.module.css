@@ -1,0 +1,15 @@
+.Input {
+  width: 60%;
+  padding: 10px;
+  font-size: 20px;
+  background: none;
+  border: 1px solid #000;
+}
+
+.Input:focus-visible {
+  outline: none;
+}
+
+.Input:focus {
+  background:rgb(0, 0, 0, .05);
+}

@@ -1,0 +1,30 @@
+.Button {
+  font-size: 20px;
+  padding: 10px;
+  background: none;
+  border: 1px solid #000;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.Button:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.Button:active {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.ButtonForm {
+  border: none;
+  background: none;
+  font-size: 25px;
+  padding: 5px 15px;
+  cursor: pointer;
+  transition: scale 1s linear;
+}
+
+.ButtonForm:hover {
+  background: none;
+  transform: scale(1.5);
+}

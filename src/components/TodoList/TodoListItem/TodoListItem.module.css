@@ -1,0 +1,18 @@
+.todoItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.completed {
+  text-decoration: line-through;
+  margin: 0;
+}
+
+.todoItem p {
+  font-size: 20px;
+  flex: 1;
+  text-align: left;
+}
