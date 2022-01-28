@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Form from '../Form/Form'
 import { TodoListItem } from './TodoListItem/TodoListItem'
 import cls from './TodoList.module.css'
+import Alert from '../Alert/Alert'
 
 const TodoList = () => {
   const [todos, setTodos] = useState([
@@ -11,7 +12,9 @@ const TodoList = () => {
       completed: false,
     },
   ])
+
   const [todoText, setTodoText] = useState('')
+  const [todoAlert, setTodoAlert] = useState(false)
 
   const onClickDelete = (id: string) => {
     const currentTodo = todos.filter((todo) => todo.id !== id)
@@ -28,14 +31,16 @@ const TodoList = () => {
 
   const addNewTodo = () => {
     setTodoText('')
-    
+
     const newTodo = {
       id: Math.random().toString().substring(2),
       text: todoText,
       completed: false,
     }
-    if(newTodo.text === '') {
-      return 
+    if (!newTodo.text) {
+      return setTodoAlert(true)
+    } else {
+      setTodoAlert(false)
     }
     setTodos([...todos, newTodo])
   }
@@ -55,8 +60,10 @@ const TodoList = () => {
             onComplete={() => onClickComplete(todo.id)}
             key={todo.id}
             completed={todo.completed}
-          />)
-      })}
+          />
+        )})}
+      {todoAlert ? <Alert text={'Напишите задачу'} /> : null}
+      {!todos.length ? <Alert text={'Нет задач'} /> : null}
     </div>
   )
 }
