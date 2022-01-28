@@ -15,4 +15,5 @@
   font-size: 20px;
   flex: 1;
   text-align: left;
+  word-break: break-all;
 }
