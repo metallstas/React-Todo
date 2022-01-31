@@ -1,4 +1,4 @@
-.Button {
+.button {
   font-size: 20px;
   padding: 10px;
   background: none;
@@ -7,15 +7,15 @@
   cursor: pointer;
 }
 
-.Button:hover {
+.button:hover {
   background: rgba(0, 0, 0, 0.1);
 }
 
-.Button:active {
+.button:active {
   background: rgba(0, 0, 0, 0.3);
 }
 
-.ButtonForm {
+.buttonForm {
   border: none;
   background: none;
   font-size: 25px;
@@ -24,7 +24,7 @@
   transition: scale 1s linear;
 }
 
-.ButtonForm:hover {
+.buttonForm:hover {
   background: none;
   transform: scale(1.5);
 }

@@ -8,7 +8,7 @@ interface IProps {
 
 const Input = ({onChange, value}:IProps) => {
   return (
-    <input className={cls.Input} onChange={onChange} value={value} />   
+    <input className={cls.input} onChange={onChange} value={value} />   
   )
 }
 

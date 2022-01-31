@@ -8,7 +8,7 @@ import Button from '../Button/Button'
 interface IProps {
   id: string;
   text: string;
-  completed: boolean;
+  complete: boolean;
   times: string;
   check: boolean;
 }
@@ -19,7 +19,7 @@ const TodoList = () => {
   const [todoText, setTodoText] = useState<string>('')
   const [todoAlert, setTodoAlert] = useState<boolean>(false)
   const [redactTextId, setRedactTextId] = useState<string>('')
-  const check = todos.some((todo) => (todo.check ? true : false))
+  const hasCheckedTodos = todos.some(todo => todo.check)
 
   const addNewTodo = () => {
     setTodoText('')
@@ -37,7 +37,7 @@ const TodoList = () => {
     const newTodo = {
       id: Math.random().toString().substring(2),
       text: todoText,
-      completed: false,
+      complete: false,
       times: `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`,
       check: false,
     }
@@ -67,26 +67,26 @@ const TodoList = () => {
   const onClickComplete = (id: string) => {
     setTodos([
       ...todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+        todo.id === id ? { ...todo, complete: !todo.complete } : todo
       ),
     ])
   }
 
-  const completedAll = () => {
+  const completeAll = () => {
     setTodos([
       ...todos.map((todo) =>
-        todo.check ? { ...todo, completed: !todo.completed } : todo
+        todo.check ? { ...todo, complete: !todo.complete } : todo
       ),
     ])
   }
 
-  const deletedAll = () => {
+  const deleteAll = () => {
     setTodos([...todos.filter((todo) => !todo.check)])
   }
 
-  const coutnCompletedTodo = () => {
-    const completedTodos = todos.filter((todo) => todo.completed)
-    return completedTodos.length
+  const coutnCompleteTodo = () => {
+    const completeTodos = todos.filter((todo) => todo.complete)
+    return completeTodos.length
   }
 
   const redactTodo = (text: string, id: string) => {
@@ -108,7 +108,7 @@ const TodoList = () => {
             onDelete={() => onClickDelete(todo.id)}
             onComplete={() => onClickComplete(todo.id)}
             key={todo.id}
-            completed={todo.completed}
+            complete={todo.complete}
             times={todo.times}
             check={todo.check}
             checkTodo={() => checkTodo(todo.id)}
@@ -118,22 +118,22 @@ const TodoList = () => {
       })}
       {todoAlert ? <Alert text={'Напишите задачу'} /> : null}
       {!todos.length ? <Alert text={'Нет задач'} /> : null}
-      {check ? (
+      {hasCheckedTodos ? (
         <div className={cls.blockButton}>
           <Button
             buttonTodo={false}
-            onClick={completedAll}
+            onClick={completeAll}
             text={'Завершить'}
           />
           <Button 
             buttonTodo={false} 
-            onClick={deletedAll} 
+            onClick={deleteAll} 
             text={'Удалить'} 
           />
         </div>
       ) : null}
       <p>Всего задач: {todos.length}</p>
-      <p>Выполненых задач: {coutnCompletedTodo()}</p>
+      <p>Выполненых задач: {coutnCompleteTodo()}</p>
     </div>
   )
 }

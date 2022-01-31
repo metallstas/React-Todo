@@ -8,7 +8,7 @@ interface IProps {
 
 const Button = ({text, onClick, buttonTodo}: IProps) => {
   return (
-    <button className={buttonTodo ? `${cls.ButtonForm}` : `${cls.Button}`} onClick={onClick}>{text}</button>
+    <button className={buttonTodo ? `${cls.buttonForm}` : `${cls.button}`} onClick={onClick}>{text}</button>
   )
 }
 

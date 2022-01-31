@@ -6,7 +6,7 @@
   margin: 10px auto;
 }
 
-.completed {
+.complete {
   text-decoration: line-through;
   margin: 0;
 }

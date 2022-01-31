@@ -10,7 +10,7 @@ interface IProps {
 
 const Form = ({todoText, setTodoText, addNewTodo}: IProps) => {
   return (
-    <div className={cls.Form}>
+    <div className={cls.form}>
       <Input value={todoText} onChange={(e) => {setTodoText(e.target.value)}} />
       <Button buttonTodo={false} text='Добавить' onClick={addNewTodo} />
     </div>

@@ -6,7 +6,7 @@ interface IProps {
   text: string;
   onDelete: () => void;
   onComplete: () => void;
-  completed: boolean;
+  complete: boolean;
   times: string;
   check: boolean;
   checkTodo: () => void;
@@ -14,12 +14,12 @@ interface IProps {
 }
 
 export const TodoListItem = (props: IProps) => {
-  const { text, onDelete, onComplete, completed, times, check, checkTodo, redactTodo } = props
-  const completedTodo = completed ? cls.completed : cls.todoItem
-  const [showTask, setShowTask] = useState<boolean>(false)
+  const { text, onDelete, onComplete, complete, times, check, checkTodo, redactTodo } = props
+  const completeTodo = complete ? cls.complete : cls.todoItem
+  const [showTime, setShowTime] = useState<boolean>(false)
 
   const showTodo = () => {
-    setShowTask(!showTask)
+    setShowTime(!showTime)
   }
 
   return (
@@ -30,10 +30,10 @@ export const TodoListItem = (props: IProps) => {
         onClick={onComplete} 
       />
       <div>
-        <p className={completedTodo} onClick={showTodo}>
+        <p className={completeTodo} onClick={showTodo}>
           {text}
         </p>
-        {showTask ? <p className={cls.time}>Создано: {times}</p> : null}
+        {showTime ? <p className={cls.time}>Создано: {times}</p> : null}
       </div>
       <Button 
         text='&#9998;'

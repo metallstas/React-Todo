@@ -4,7 +4,7 @@ interface IProps {
 }
 
 const Alert = ({ text }: IProps) => {
-  return <p className={cls.Alert}>{text}</p>
+  return <p className={cls.alert}>{text}</p>
 }
 
 export default Alert
