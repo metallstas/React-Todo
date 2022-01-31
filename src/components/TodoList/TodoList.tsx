@@ -18,10 +18,21 @@ const TodoList = () => {
 
   const [todoText, setTodoText] = useState<string>('')
   const [todoAlert, setTodoAlert] = useState<boolean>(false)
+  const [redactTextId, setRedactTextId] = useState<string>('')
   const check = todos.some((todo) => (todo.check ? true : false))
 
   const addNewTodo = () => {
     setTodoText('')
+
+    if (redactTextId) {
+      setTodos([
+        ...todos.map(todo =>
+          todo.id === redactTextId ? { ...todo, text: todoText } : todo
+        ),
+      ])
+
+      return setRedactTextId('')
+    }
 
     const newTodo = {
       id: Math.random().toString().substring(2),
@@ -36,13 +47,14 @@ const TodoList = () => {
     } else {
       setTodoAlert(false)
     }
+
     setTodos([...todos, newTodo])
   }
 
   const checkTodo = (id: string) => {
     setTodos([
       ...todos.map((todo) =>
-        id === todo.id ? { ...todo, check: !todo.check } : { ...todo }
+        id === todo.id ? { ...todo, check: !todo.check } : todo
       ),
     ])
   }
@@ -55,7 +67,7 @@ const TodoList = () => {
   const onClickComplete = (id: string) => {
     setTodos([
       ...todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : { ...todo }
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
       ),
     ])
   }
@@ -63,7 +75,7 @@ const TodoList = () => {
   const completedAll = () => {
     setTodos([
       ...todos.map((todo) =>
-        todo.check ? { ...todo, completed: !todo.completed } : { ...todo }
+        todo.check ? { ...todo, completed: !todo.completed } : todo
       ),
     ])
   }
@@ -75,6 +87,11 @@ const TodoList = () => {
   const coutnCompletedTodo = () => {
     const completedTodos = todos.filter((todo) => todo.completed)
     return completedTodos.length
+  }
+
+  const redactTodo = (text: string, id: string) => {
+    setRedactTextId(id)
+    setTodoText(text)
   }
 
   return (
@@ -95,6 +112,7 @@ const TodoList = () => {
             times={todo.times}
             check={todo.check}
             checkTodo={() => checkTodo(todo.id)}
+            redactTodo={() => redactTodo(todo.text, todo.id)}
           />
         )
       })}
@@ -115,7 +133,7 @@ const TodoList = () => {
         </div>
       ) : null}
       <p>Всего задач: {todos.length}</p>
-      <p>Выполненых задач: {coutnCompletedTodo()}</p>     
+      <p>Выполненых задач: {coutnCompletedTodo()}</p>
     </div>
   )
 }

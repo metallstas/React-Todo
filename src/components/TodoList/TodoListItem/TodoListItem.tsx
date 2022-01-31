@@ -10,10 +10,11 @@ interface IProps {
   times: string;
   check: boolean;
   checkTodo: () => void;
+  redactTodo: () => void;
 }
 
 export const TodoListItem = (props: IProps) => {
-  const { text, onDelete, onComplete, completed, times, check, checkTodo } = props
+  const { text, onDelete, onComplete, completed, times, check, checkTodo, redactTodo } = props
   const completedTodo = completed ? cls.completed : cls.todoItem
   const [showTask, setShowTask] = useState<boolean>(false)
 
@@ -32,8 +33,13 @@ export const TodoListItem = (props: IProps) => {
         <p className={completedTodo} onClick={showTodo}>
           {text}
         </p>
-        {showTask ? <p className={cls.time}>{times}</p> : null}
+        {showTask ? <p className={cls.time}>Создано: {times}</p> : null}
       </div>
+      <Button 
+        text='&#9998;'
+        buttonTodo={true}
+        onClick={redactTodo}  
+      />
       <input type='checkbox' checked={check} onChange={checkTodo} />
       <Button 
         buttonTodo={true} 
