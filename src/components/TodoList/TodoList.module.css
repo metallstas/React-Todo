@@ -1,0 +1,12 @@
+.todoList {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.todoList p {
+  font-size: 20px;
+}
+
+.blockButton {
+  margin: 20px 0;
+}
