@@ -7,7 +7,7 @@ import {
   ADD_TODO,
   ALERT,
   CHANGE_TODOS,
-  GET_TEXT_CURRENT_TODO,
+  TEXT_CURRENT_TODO,
   ITodos,
 } from '../../redux/toodList/types/types'
 
@@ -35,7 +35,7 @@ const Form = () => {
 
   const handleTodoText = (text: string) => {
     if (state.currentRedactTodoText) {
-      dispatch({ type: GET_TEXT_CURRENT_TODO, text: text })
+      dispatch({ type: TEXT_CURRENT_TODO, text: text })
       return
     }
     dispatch({ type: ADD_TEXT_TODO, textTodo: text })

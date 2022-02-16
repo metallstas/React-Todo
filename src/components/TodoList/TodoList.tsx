@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   CHANGE_TODOS,
   ITodos,
-  GET_ID_CURRENT_TODO,
-  GET_TEXT_CURRENT_TODO,
+  ID_CURRENT_TODO,
+  TEXT_CURRENT_TODO,
 } from '../../redux/toodList/types/types'
 
 const TodoList = () => {
@@ -17,14 +17,14 @@ const TodoList = () => {
 
   const hasCheckedTodos = state.todos.some((todo) => todo.check)
 
-  const completeAll = () => {
+  const completeAllMarkedTodos = () => {
     const complete = state.todos.map((todo) =>
       todo.check ? { ...todo, complete: !todo.complete } : todo
     )
     dispatch({ type: CHANGE_TODOS, todos: complete })
   }
 
-  const deleteAll = () => {
+  const deleteAllMarkedTodos = () => {
     const deleteAll = state.todos.filter((todo) => !todo.check)
     dispatch({ type: CHANGE_TODOS, todos: deleteAll })
   }
@@ -35,8 +35,8 @@ const TodoList = () => {
   }
 
   const redactTodo = (text: string, id: string) => {
-    dispatch({ type: GET_ID_CURRENT_TODO, id })
-    dispatch({ type: GET_TEXT_CURRENT_TODO, text })
+    dispatch({ type: ID_CURRENT_TODO, id })
+    dispatch({ type: TEXT_CURRENT_TODO, text })
   }
 
   return (
@@ -60,8 +60,8 @@ const TodoList = () => {
       {!state.todos.length ? <Alert text={'Нет задач'} /> : null}
       {hasCheckedTodos ? (
         <div className={cls.blockButton}>
-          <Button buttonTodo={false} onClick={completeAll} text={'Завершить'} />
-          <Button buttonTodo={false} onClick={deleteAll} text={'Удалить'} />
+          <Button buttonTodo={false} onClick={completeAllMarkedTodos} text={'Завершить'} />
+          <Button buttonTodo={false} onClick={deleteAllMarkedTodos} text={'Удалить'} />
         </div>
       ) : null}
       <p>Всего задач: {state.todos.length}</p>

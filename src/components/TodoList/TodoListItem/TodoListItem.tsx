@@ -34,12 +34,12 @@ export const TodoListItem = ({
     dispatch({ type: CHANGE_TODOS, todos: isCheckboxTodo })
   }
 
-  const onClickDelete = (id: string) => {
+  const onClickDeleteTodo = (id: string) => {
     const currentTodo = state.todos.filter((todo) => todo.id !== id)
     dispatch({ type: CHANGE_TODOS, todos: currentTodo })
   }
 
-  const onClickComplete = (id: string) => {
+  const onClickCompleteTodo = (id: string) => {
     const completeTodo = state.todos.map((todo) =>
       todo.id === id ? { ...todo, complete: !todo.complete } : todo
     )
@@ -58,7 +58,7 @@ export const TodoListItem = ({
       <Button
         buttonTodo={true}
         text='&#10004;'
-        onClick={() => onClickComplete(id)}
+        onClick={() => onClickCompleteTodo(id)}
       />
       <div>
         <p className={completeTodo} onClick={() => showTodo(id)}>
@@ -71,7 +71,7 @@ export const TodoListItem = ({
       <Button
         buttonTodo={true}
         text='&#10005;'
-        onClick={() => onClickDelete(id)}
+        onClick={() => onClickDeleteTodo(id)}
       />
     </div>
   )

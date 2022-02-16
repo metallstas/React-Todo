@@ -5,8 +5,8 @@ import {
   ADD_TODO,
   ALERT,
   CHANGE_TODOS,
-  GET_ID_CURRENT_TODO,
-  GET_TEXT_CURRENT_TODO,
+  ID_CURRENT_TODO,
+  TEXT_CURRENT_TODO,
   ITodos,
 } from '../types/types'
 
@@ -46,11 +46,11 @@ const todoReducer = (state = defaultState, action: any) => {
     return { ...state, showAlert: action.showAlert }
   }
 
-  if (action.type === GET_ID_CURRENT_TODO) {
+  if (action.type === ID_CURRENT_TODO) {
     return { ...state, currentRedactTodoId: action.id }
   }
 
-  if (action.type === GET_TEXT_CURRENT_TODO) {
+  if (action.type === TEXT_CURRENT_TODO) {
     return { ...state, currentRedactTodoText: action.text }
   }
 
