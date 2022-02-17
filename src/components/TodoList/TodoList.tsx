@@ -5,32 +5,29 @@ import Alert from '../Alert/Alert'
 import Button from '../Button/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  CHANGE_TODOS,
   ITodos,
   ID_CURRENT_TODO,
   TEXT_CURRENT_TODO,
+  COMPLETE_ALL_TODOS,
+  DELETE_ALL_TODOS,
 } from '../../redux/toodList/types/types'
 
 const TodoList = () => {
-  const state = useSelector((state: ITodos) => state)
+  const {todos, showAlert} = useSelector((state: ITodos) => state)
   const dispatch = useDispatch()
 
-  const hasCheckedTodos = state.todos.some((todo) => todo.check)
+  const hasCheckedTodos = todos.some((todo) => todo.check)
 
   const completeAllMarkedTodos = () => {
-    const complete = state.todos.map((todo) =>
-      todo.check ? { ...todo, complete: !todo.complete } : todo
-    )
-    dispatch({ type: CHANGE_TODOS, todos: complete })
+    dispatch({ type: COMPLETE_ALL_TODOS})
   }
 
   const deleteAllMarkedTodos = () => {
-    const deleteAll = state.todos.filter((todo) => !todo.check)
-    dispatch({ type: CHANGE_TODOS, todos: deleteAll })
+    dispatch({ type: DELETE_ALL_TODOS })
   }
 
   const coutnCompleteTodo = () => {
-    const completeTodos = state.todos.filter((todo) => todo.complete)
+    const completeTodos = todos.filter((todo) => todo.complete)
     return completeTodos.length
   }
 
@@ -42,7 +39,7 @@ const TodoList = () => {
   return (
     <div className={cls.todoList}>
       <Form />
-      {state.todos.map((todo) => {
+      {todos.map((todo) => {
         return (
           <TodoListItem
             text={todo.text}
@@ -56,15 +53,15 @@ const TodoList = () => {
           />
         )
       })}
-      {state.showAlert ? <Alert text={'Напишите задачу'} /> : null}
-      {!state.todos.length ? <Alert text={'Нет задач'} /> : null}
+      {showAlert ? <Alert text={'Напишите задачу'} /> : null}
+      {!todos.length ? <Alert text={'Нет задач'} /> : null}
       {hasCheckedTodos ? (
         <div className={cls.blockButton}>
           <Button buttonTodo={false} onClick={completeAllMarkedTodos} text={'Завершить'} />
           <Button buttonTodo={false} onClick={deleteAllMarkedTodos} text={'Удалить'} />
         </div>
       ) : null}
-      <p>Всего задач: {state.todos.length}</p>
+      <p>Всего задач: {todos.length}</p>
       <p>Выполненых задач: {coutnCompleteTodo()}</p>
     </div>
   )

@@ -1,7 +1,13 @@
 import Button from '../../Button/Button'
 import cls from './TodoListItem.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { CHANGE_TODOS, ITodos } from '../../../redux/toodList/types/types'
+import {
+  CHECK_TODO,
+  COMPLETE_TODO,
+  DELETE_TODO,
+  ITodos,
+  SHOW_TODO_TIME,
+} from '../../../redux/toodList/types/types'
 
 interface IProps {
   id: string;
@@ -10,7 +16,7 @@ interface IProps {
   times: string;
   check: boolean;
   showTime: boolean;
-  redactTodo: () => void
+  redactTodo: () => void;
 }
 
 export const TodoListItem = ({
@@ -24,33 +30,22 @@ export const TodoListItem = ({
 }: IProps) => {
   const completeTodo = complete ? cls.complete : cls.todoItem
 
-  const state = useSelector((state: ITodos) => state)
   const dispatch = useDispatch()
 
   const checkTodo = (id: string) => {
-    const isCheckboxTodo = state.todos.map((todo) =>
-      id === todo.id ? { ...todo, check: !todo.check } : todo
-    )
-    dispatch({ type: CHANGE_TODOS, todos: isCheckboxTodo })
+    dispatch({ type: CHECK_TODO, id })
   }
 
   const onClickDeleteTodo = (id: string) => {
-    const currentTodo = state.todos.filter((todo) => todo.id !== id)
-    dispatch({ type: CHANGE_TODOS, todos: currentTodo })
+    dispatch({ type: DELETE_TODO, id })
   }
 
   const onClickCompleteTodo = (id: string) => {
-    const completeTodo = state.todos.map((todo) =>
-      todo.id === id ? { ...todo, complete: !todo.complete } : todo
-    )
-    dispatch({ type: CHANGE_TODOS, todos: completeTodo })
+    dispatch({ type: COMPLETE_TODO, id })
   }
 
-  const showTodo = (id: string) => {
-    const showTime = state.todos.map((todo) =>
-      todo.id === id ? { ...todo, showTime: !todo.showTime } : todo
-    )
-    dispatch({ type: CHANGE_TODOS, todos: showTime })
+  const showTodoTime = (id: string) => {
+    dispatch({ type: SHOW_TODO_TIME, id })
   }
 
   return (
@@ -61,7 +56,7 @@ export const TodoListItem = ({
         onClick={() => onClickCompleteTodo(id)}
       />
       <div>
-        <p className={completeTodo} onClick={() => showTodo(id)}>
+        <p className={completeTodo} onClick={() => showTodoTime(id)}>
           {text}
         </p>
         {showTime ? <p className={cls.time}>Создано: {times}</p> : null}

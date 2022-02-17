@@ -6,27 +6,19 @@ import {
   ADD_TEXT_TODO,
   ADD_TODO,
   ALERT,
-  CHANGE_TODOS,
   TEXT_CURRENT_TODO,
   ITodos,
+  REDACT_TODO,
 } from '../../redux/toodList/types/types'
 
 const Form = () => {
-  const state = useSelector((state: ITodos) => state)
+  const { textTodo, currentRedactTodoText} = useSelector((state: ITodos) => state)
 
   const dispatch = useDispatch()
 
-  const currentValue = () => {
-    if (state.currentRedactTodoText) {
-      return state.currentRedactTodoText
-    }
-
-    return state.textTodo
-  }
-
   const newTodo = {
     id: Math.random().toString().substring(2),
-    text: state.textTodo,
+    text: textTodo,
     complete: false,
     times: `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`,
     check: false,
@@ -34,25 +26,20 @@ const Form = () => {
   }
 
   const handleTodoText = (text: string) => {
-    if (state.currentRedactTodoText) {
-      dispatch({ type: TEXT_CURRENT_TODO, text: text })
+    if (currentRedactTodoText) {
+      dispatch({ type: TEXT_CURRENT_TODO, text })
       return
     }
     dispatch({ type: ADD_TEXT_TODO, textTodo: text })
   }
 
   const addNewTodo = () => {
-    if (state.currentRedactTodoText) {
-      const redactTodo = state.todos.map((todo) =>
-        todo.id === state.currentRedactTodoId
-          ? { ...todo, text: state.currentRedactTodoText }
-          : todo
-      )
-      dispatch({type: CHANGE_TODOS, todos: redactTodo})
+    if (currentRedactTodoText) {
+      dispatch({type: REDACT_TODO})
       return 
     }
 
-    if (state.textTodo) {
+    if (textTodo) {
       dispatch({ type: ADD_TODO, todo: newTodo })
       dispatch({ type: ALERT, showAlert: false })
       return
@@ -63,7 +50,7 @@ const Form = () => {
   return (
     <div className={cls.form}>
       <Input
-        value={currentValue()}
+        value={currentRedactTodoText || textTodo}
         onChange={(e) => handleTodoText(e.target.value)}
       />
       <Button buttonTodo={false} text='Добавить' onClick={addNewTodo} />
