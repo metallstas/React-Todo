@@ -40,7 +40,7 @@ const Form = () => {
     }
 
     if (textTodo) {
-      dispatch({ type: ADD_TODO, todo: newTodo })
+      dispatch({ type: ADD_TODO, textTodo })
       dispatch({ type: ALERT, showAlert: false })
       return
     }

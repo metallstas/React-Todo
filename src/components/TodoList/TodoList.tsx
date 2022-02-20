@@ -18,6 +18,8 @@ const TodoList = () => {
 
   const hasCheckedTodos = todos.some((todo) => todo.check)
 
+  const a = localStorage.setItem('todos', JSON.stringify(todos))
+
   const completeAllMarkedTodos = () => {
     dispatch({ type: COMPLETE_ALL_TODOS})
   }

@@ -26,9 +26,19 @@ const defaultState: ITodos = {
 
 const todoReducer = (state = defaultState, action: any) => {
   if (action.type === ADD_TODO) {
+    
+    const todo = {
+      id: Math.random().toString().substring(2),
+      text: '',
+      complete: false,
+      times: `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`,
+      check: false,
+      showTime: false,
+    }
+
     return {
       ...state,
-      todos: [...state.todos, action.todo],
+      todos: [...state.todos, {...todo, text: action.textTodo}],
       textTodo: '',
       currentRedactTodoId: '',
       currentRedactTodoText: '',

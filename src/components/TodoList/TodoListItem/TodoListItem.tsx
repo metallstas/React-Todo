@@ -4,10 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   CHECK_TODO,
   COMPLETE_TODO,
-  DELETE_TODO,
-  ITodos,
   SHOW_TODO_TIME,
 } from '../../../redux/toodList/types/types'
+import { deleteTodo } from '../../../redux/toodList/store/actions/todosActions'
 
 interface IProps {
   id: string;
@@ -37,7 +36,7 @@ export const TodoListItem = ({
   }
 
   const onClickDeleteTodo = (id: string) => {
-    dispatch({ type: DELETE_TODO, id })
+    dispatch(deleteTodo(id))
   }
 
   const onClickCompleteTodo = (id: string) => {
