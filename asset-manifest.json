@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/React-Todo/static/css/main.db644e65.chunk.css",
+    "main.js": "/React-Todo/static/js/main.49926e1f.chunk.js",
+    "main.js.map": "/React-Todo/static/js/main.49926e1f.chunk.js.map",
+    "runtime-main.js": "/React-Todo/static/js/runtime-main.844a3746.js",
+    "runtime-main.js.map": "/React-Todo/static/js/runtime-main.844a3746.js.map",
+    "static/js/2.22290159.chunk.js": "/React-Todo/static/js/2.22290159.chunk.js",
+    "static/js/2.22290159.chunk.js.map": "/React-Todo/static/js/2.22290159.chunk.js.map",
+    "static/js/3.541d9aa9.chunk.js": "/React-Todo/static/js/3.541d9aa9.chunk.js",
+    "static/js/3.541d9aa9.chunk.js.map": "/React-Todo/static/js/3.541d9aa9.chunk.js.map",
+    "index.html": "/React-Todo/index.html",
+    "static/css/main.db644e65.chunk.css.map": "/React-Todo/static/css/main.db644e65.chunk.css.map",
+    "static/js/2.22290159.chunk.js.LICENSE.txt": "/React-Todo/static/js/2.22290159.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/React-Todo/static/media/back.dcfc800c.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.844a3746.js",
+    "static/js/2.22290159.chunk.js",
+    "static/css/main.db644e65.chunk.css",
+    "static/js/main.49926e1f.chunk.js"
+  ]
+}
